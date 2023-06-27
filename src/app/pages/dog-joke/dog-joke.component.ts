@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { JokesService } from 'src/app/services/jokes.service';
-import { Subscription, interval } from 'rxjs';
+import { Subscription, interval, forkJoin  } from 'rxjs';
+import { ImagesService } from 'src/app/services/images.service';
 
 @Component({
   selector: 'app-dog-joke',
@@ -10,33 +11,46 @@ import { Subscription, interval } from 'rxjs';
 export class DogJokeComponent implements OnInit, OnDestroy {
 
   joke : string = '';
+  urlImg : string = '';
   subscription !: Subscription;
+  seconds : number = 0;
+  intervalId: any;
 
-  constructor(private jokeServ : JokesService) { }
+  constructor(private jokeServ : JokesService, private imgServ : ImagesService) { }
 
   ngOnInit(): void {
-    this.getJokes();
-    this.subscription = interval(5000).subscribe(() => {
-      this.getJokes();
-    });
+    this.loadData()
+    //this.startSubscription()
   }
   
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
-  getJokes(){
-    this.jokeServ.getJoke().subscribe(data=>{
-      this.joke = `${data.setup} ${data.punchline}`
-    })
+  loadData(){
+    this.seconds = 20;
+    forkJoin({
+      dogData: this.imgServ.getImg(),
+      jokeData: this.jokeServ.getJoke()
+    }).subscribe(({ dogData, jokeData }) => {
+      this.urlImg = dogData.message;
+      this.joke = `${jokeData.setup} ${jokeData.punchline}`
+    });
+  }
+
+  startSubscription(){
+    this.subscription = interval(1000).subscribe(() => {      
+      this.seconds--;      
+      if(this.seconds === 0){
+        this.loadData()
+      }      
+    });
   }
   
-  refreshJokes() {
+  refreshData() {
     this.subscription.unsubscribe();
-    this.getJokes();
-    this.subscription = interval(5000).subscribe(() => {
-      this.getJokes();
-    });
+    this.loadData()
+    //this.startSubscription()
   }
 
 }
