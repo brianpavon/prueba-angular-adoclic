@@ -1,9 +1,13 @@
+.outer-container{
+  display: flex;
+  justify-content: center;
+}
 .container {
     background-color:rgba(255,202,0,255); 
     display: flex;
     align-items: center;
-    max-width: 750px;
-    max-height: 400px;
+    width: 750px;
+    height: 400px;
 }
   
 .image {
@@ -23,9 +27,9 @@
     margin-right: 20px;
 }
 
-.text h3 {
-    margin-bottom: 10px;
+.text h3 {    
     word-wrap: break-word;
+    font-size: xx-large;
 }
   
 .text p {
@@ -39,7 +43,8 @@
     color: #6c6d53;
     font-size: larger;
     margin-top: 40px;
-    margin-left: 20px;
+    margin-left: 15px;
+    cursor: pointer;
 }
 
   /* Estilos responsive */

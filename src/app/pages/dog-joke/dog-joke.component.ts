@@ -15,7 +15,6 @@ export class DogJokeComponent implements OnInit, OnDestroy {
   urlImg : string = '';
   subscription !: Subscription;
   seconds : number = 0;
-  intervalId: any;
 
   constructor(private jokeServ : JokesService, private imgServ : ImagesService) { }
 
