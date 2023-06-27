@@ -1,6 +1,13 @@
-<div class="background">
-    <p>{{ joke }}</p>
-    <p>{{ seconds }} seconds</p>
-    <img src="{{urlImg}}" alt="img-dog">
-    <button (click)="refreshData()">Actualizar</button>
-</div>
+
+
+        <div class="container">
+            <div class="image">
+                <!-- <img src="https://images.dog.ceo/breeds/tervuren/maverick.jpg" alt="img-dog"> -->
+                <img src="{{urlImg}}" alt="img-dog">
+            </div>
+            <div class="text">
+                <h3>{{ joke }}</h3>
+                <p>{{ punchline }}...</p>
+                <button class="custom-button" (click)="refreshData()">{{ seconds }} seconds.</button>
+            </div>
+        </div>

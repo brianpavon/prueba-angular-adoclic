@@ -1,5 +1,62 @@
-.background{
-    background-color: rgba(255,202,0,255);
-    width: 100%;
-    height: 60vh;
+.container {
+    background-color:rgba(255,202,0,255); 
+    display: flex;
+    align-items: center;
+    max-width: 750px;
+    max-height: 400px;
+}
+  
+.image {
+    position: relative;
+    left: 50px;
+    bottom: -70px;
+}
+
+.image img {
+    width: 300px;
+    height: 450px;
+}
+  
+.text {
+    margin: 0 auto;
+    max-width: 300px;
+    margin-right: 20px;
+}
+
+.text h3 {
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
+  
+.text p {
+    margin-top: 60px;
+    font-size: x-large;
+}
+
+.custom-button {
+    border: 2px solid #9b7905;
+    background-color: transparent;
+    color: #6c6d53;
+    font-size: larger;
+    margin-top: 40px;
+    margin-left: 20px;
+}
+
+  /* Estilos responsive */
+@media (max-width: 1196px) {
+    .container {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .image {
+      left: 0;
+      bottom: 0;
+      margin-bottom: 20px;
+    }
+  
+    .custom-button {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
 }

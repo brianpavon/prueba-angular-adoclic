@@ -11,6 +11,7 @@ import { ImagesService } from 'src/app/services/images.service';
 export class DogJokeComponent implements OnInit, OnDestroy {
 
   joke : string = '';
+  punchline : string = '';
   urlImg : string = '';
   subscription !: Subscription;
   seconds : number = 0;
@@ -20,7 +21,7 @@ export class DogJokeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadData()
-    //this.startSubscription()
+    this.startSubscription()
   }
   
   ngOnDestroy() {
@@ -34,7 +35,8 @@ export class DogJokeComponent implements OnInit, OnDestroy {
       jokeData: this.jokeServ.getJoke()
     }).subscribe(({ dogData, jokeData }) => {
       this.urlImg = dogData.message;
-      this.joke = `${jokeData.setup} ${jokeData.punchline}`
+      this.joke = jokeData.setup;
+      this.punchline = jokeData.punchline;
     });
   }
 
@@ -50,7 +52,7 @@ export class DogJokeComponent implements OnInit, OnDestroy {
   refreshData() {
     this.subscription.unsubscribe();
     this.loadData()
-    //this.startSubscription()
+    this.startSubscription()
   }
 
 }
